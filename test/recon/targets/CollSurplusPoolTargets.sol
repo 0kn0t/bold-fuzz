@@ -15,11 +15,11 @@ abstract contract CollSurplusPoolTargets is
 
     /// AUTO GENERATED TARGET FUNCTIONS ///
 
-//    function collSurplusPool_accountSurplus(address _account, uint256 _amount) public asActor { // _requireCallerIsTroveManager
-//        collSurplusPool.accountSurplus(_account, _amount);
-//    }
+    function collSurplusPool_accountSurplus(address _account, uint256 _amount) public asActor { // _requireCallerIsTroveManager
+        collSurplusPool.accountSurplus(_account, _amount);
+    }
 
-//    function collSurplusPool_claimColl(address _account) public asActor { // _requireCallerIsBorrowerOperations
-//        collSurplusPool.claimColl(_account);
-//    }
+    function collSurplusPool_claimColl(address _account) public asActor { // _requireCallerIsBorrowerOperations
+        collSurplusPool.claimColl(_account);
+    }
 }

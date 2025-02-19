@@ -30,12 +30,15 @@ import {TroveManager} from "src/TroveManager.sol";
 import {TroveNFT} from "src/TroveNFT.sol";
 import {WETHZapper} from "src/Zappers/WETHZapper.sol";
 import {IWETH} from "src/Interfaces/IWETH.sol";
+import {HintHelpers} from "src/HintHelpers.sol";
 
 abstract contract Setup is BaseSetup, ActorManager, AssetManager {
     address second_actor = address(0x411c3);
 
     mapping(address => TestDeployer.LiquityContractsDev) contracts;
     mapping(address => TestDeployer.Zappers) zappers;
+
+    uint256 troveId;
 
     ActivePool activePool;
     AddressesRegistry addressesRegistry;
@@ -54,6 +57,7 @@ abstract contract Setup is BaseSetup, ActorManager, AssetManager {
     TroveNFT troveNFT;
     WETHZapper wETHZapper;
     IERC20Metadata collToken;
+    HintHelpers hintHelpers;
 
     function setup() internal virtual override {
         vm.warp(block.timestamp + 600);
@@ -71,7 +75,7 @@ abstract contract Setup is BaseSetup, ActorManager, AssetManager {
         ICollateralRegistry _collateralRegistry;
         IBoldToken _boldToken;
         IWETH weth;
-        (_contractsArray, _collateralRegistry, _boldToken,,, weth, _zappersArray) = deployer.deployAndConnectContractsMultiColl(troveManagerParamsArray);
+        (_contractsArray, _collateralRegistry, _boldToken, hintHelpers,, weth, _zappersArray) = deployer.deployAndConnectContractsMultiColl(troveManagerParamsArray);
         collateralRegistry = CollateralRegistry(address(_collateralRegistry));
         boldToken = BoldToken(address(_boldToken));
 

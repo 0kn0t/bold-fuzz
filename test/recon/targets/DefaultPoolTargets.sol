@@ -15,19 +15,19 @@ abstract contract DefaultPoolTargets is
 
     /// AUTO GENERATED TARGET FUNCTIONS ///
 
-//    function defaultPool_decreaseBoldDebt(uint256 _amount) public asActor { // _requireCallerIsTroveManager
-//        defaultPool.decreaseBoldDebt(_amount);
-//    }
+    function defaultPool_decreaseBoldDebt(uint256 _amount) public asActor { // _requireCallerIsTroveManager
+        defaultPool.decreaseBoldDebt(_amount);
+    }
 
-//    function defaultPool_increaseBoldDebt(uint256 _amount) public asActor { // _requireCallerIsTroveManager
-//        defaultPool.increaseBoldDebt(_amount);
-//    }
+    function defaultPool_increaseBoldDebt(uint256 _amount) public asActor { // _requireCallerIsTroveManager
+        defaultPool.increaseBoldDebt(_amount);
+    }
 
-//    function defaultPool_receiveColl(uint256 _amount) public asActor { // _requireCallerIsActivePool
-//        defaultPool.receiveColl(_amount);
-//    }
+    function defaultPool_receiveColl(uint256 _amount) public asActor { // _requireCallerIsActivePool
+        defaultPool.receiveColl(_amount);
+    }
 
-//    function defaultPool_sendCollToActivePool(uint256 _amount) public asActor { // _requireCallerIsTroveManager
-//        defaultPool.sendCollToActivePool(_amount);
-//    }
+    function defaultPool_sendCollToActivePool(uint256 _amount) public asActor { // _requireCallerIsTroveManager
+        defaultPool.sendCollToActivePool(_amount);
+    }
 }

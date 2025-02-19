@@ -16,35 +16,35 @@ abstract contract ActivePoolTargets is
 
     /// AUTO GENERATED TARGET FUNCTIONS ///
 
-//    function activePool_accountForReceivedColl(uint256 _amount) public asActor { // _requireCallerIsBorrowerOperationsOrDefaultPool
-//        activePool.accountForReceivedColl(_amount);
-//    }
+    function activePool_accountForReceivedColl(uint256 _amount) public asActor { // _requireCallerIsBorrowerOperationsOrDefaultPool
+        activePool.accountForReceivedColl(_amount);
+    }
 
-//    function activePool_mintAggInterest() public asActor { // _requireCallerIsBOorSP
-//        activePool.mintAggInterest();
-//    }
+    function activePool_mintAggInterest() public asActor { // _requireCallerIsBOorSP
+        activePool.mintAggInterest();
+    }
 
-//    function activePool_mintAggInterestAndAccountForTroveChange(TroveChange memory _troveChange, address _batchAddress) public asActor { // _requireCallerIsBOorTroveM
-//        activePool.mintAggInterestAndAccountForTroveChange(_troveChange, _batchAddress);
-//    }
+    function activePool_mintAggInterestAndAccountForTroveChange(TroveChange memory _troveChange, address _batchAddress) public asActor { // _requireCallerIsBOorTroveM
+        activePool.mintAggInterestAndAccountForTroveChange(_troveChange, _batchAddress);
+    }
 
-//    function activePool_mintBatchManagementFeeAndAccountForChange(TroveChange memory _troveChange, address _batchAddress) public asActor { // _requireCallerIsTroveManager
-//        activePool.mintBatchManagementFeeAndAccountForChange(_troveChange, _batchAddress);
-//    }
+    function activePool_mintBatchManagementFeeAndAccountForChange(TroveChange memory _troveChange, address _batchAddress) public asActor { // _requireCallerIsTroveManager
+        activePool.mintBatchManagementFeeAndAccountForChange(_troveChange, _batchAddress);
+    }
 
-//    function activePool_receiveColl(uint256 _amount) public asActor { // _requireCallerIsBorrowerOperationsOrDefaultPool
-//        activePool.receiveColl(_amount);
-//    }
+    function activePool_receiveColl(uint256 _amount) public asActor { // _requireCallerIsBorrowerOperationsOrDefaultPool
+        activePool.receiveColl(_amount);
+    }
 
-//    function activePool_sendColl(address _account, uint256 _amount) public asActor { // _requireCallerIsBOorTroveMorSP
-//        activePool.sendColl(_account, _amount);
-//    }
+    function activePool_sendColl(address _account, uint256 _amount) public asActor { // _requireCallerIsBOorTroveMorSP
+        activePool.sendColl(_account, _amount);
+    }
 
-//    function activePool_sendCollToDefaultPool(uint256 _amount) public asActor { // _requireCallerIsTroveManager
-//        activePool.sendCollToDefaultPool(_amount);
-//    }
+    function activePool_sendCollToDefaultPool(uint256 _amount) public asActor { // _requireCallerIsTroveManager
+        activePool.sendCollToDefaultPool(_amount);
+    }
 
-//    function activePool_setShutdownFlag() public asActor { // _requireCallerIsTroveManager
-//        activePool.setShutdownFlag();
-//    }
+    function activePool_setShutdownFlag() public asActor { // _requireCallerIsTroveManager
+        activePool.setShutdownFlag();
+    }
 }
