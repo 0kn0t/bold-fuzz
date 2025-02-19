@@ -12,12 +12,13 @@ contract ERC20Faucet is ERC20Permit, Ownable {
     mapping(address => uint256) public lastTapped;
     mapping(address spender => bool) public mock_isWildcardSpender;
 
-    constructor(string memory _name, string memory _symbol, uint256 _tapAmount, uint256 _tapPeriod)
+    constructor(string memory _name, string memory _symbol, uint256 _tapAmount, uint256 _tapPeriod, address _owner)
         ERC20Permit(_name)
         ERC20(_name, _symbol)
     {
         tapAmount = _tapAmount;
         tapPeriod = _tapPeriod;
+        transferOwnership(_owner);
     }
 
     function mint(address _to, uint256 _amount) external onlyOwner {

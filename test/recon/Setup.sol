@@ -8,6 +8,7 @@ import {vm} from "@chimera/Hevm.sol";
 import "openzeppelin-contracts/contracts/token/ERC20/extensions/IERC20Metadata.sol";
 
 import {TestDeployer} from "../Deployment.t.sol";
+import {ERC20Faucet} from "../mocks/ERC20Faucet.sol";
 
 // Managers
 import {ActorManager} from "./managers/ActorManager.sol";
@@ -75,30 +76,39 @@ abstract contract Setup is BaseSetup, ActorManager, AssetManager {
         boldToken = BoldToken(address(_boldToken));
 
         contracts[address(weth)] = _contractsArray[0];
-        zappers[address(weth)] = _zappersArray[1];
+        zappers[address(weth)] = _zappersArray[0];
         _addAsset(address(weth));
+        _switchAsset(0);
         for(uint i = 1; i < _contractsArray.length; i++) {
             contracts[address(_contractsArray[i].collToken)] = _contractsArray[i];
             zappers[address(_contractsArray[i].collToken)] = _zappersArray[i];
             _addAsset(address(_contractsArray[i].collToken));
         }
 
-        addressesRegistry = AddressesRegistry(_contractsArray[0].addressesRegistry);
+        addressesRegistry = _contractsArray[0].addressesRegistry;
         collToken = _contractsArray[0].collToken;
-        activePool = ActivePool(address(_contractsArray[0].activePool));
-        borrowerOperations = BorrowerOperations(address(_contractsArray[0].borrowerOperations));
-        collSurplusPool = CollSurplusPool(address(_contractsArray[0].pools.collSurplusPool));
-        defaultPool = DefaultPool(address(_contractsArray[0].pools.defaultPool));
-        sortedTroves = SortedTroves(address(_contractsArray[0].sortedTroves));
-        stabilityPool = StabilityPool(address(_contractsArray[0].stabilityPool));
-        troveManager = TroveManager(address(_contractsArray[0].troveManager));
-        troveNFT = TroveNFT(address(_contractsArray[0].troveNFT));
-        gasCompZapper = GasCompZapper(payable(address(_zappersArray[0].gasCompZapper)));
-        leverageZapperCurve = LeverageLSTZapper(payable(address(_zappersArray[0].leverageZapperCurve)));
-        leverageZapperUniV3 = LeverageLSTZapper(payable(address(_zappersArray[0].leverageZapperUniV3)));
-        leverageZapperHybrid = LeverageLSTZapper(payable(address(_zappersArray[0].leverageZapperHybrid)));
-        wETHZapper = WETHZapper(payable(address(_zappersArray[0].wethZapper)));
+        activePool = _contractsArray[0].activePool;
+        borrowerOperations = _contractsArray[0].borrowerOperations;
+        collSurplusPool = _contractsArray[0].pools.collSurplusPool;
+        defaultPool = _contractsArray[0].pools.defaultPool;
+        sortedTroves = _contractsArray[0].sortedTroves;
+        stabilityPool = _contractsArray[0].stabilityPool;
+        troveManager = _contractsArray[0].troveManager;
+        troveNFT = _contractsArray[0].troveNFT;
+        gasCompZapper = _zappersArray[0].gasCompZapper;
+        wETHZapper = _zappersArray[0].wethZapper;
 
+        for (uint256 c = 0; c < 3; c++) {
+            for (uint256 i = 0; i < _getActors().length; i++) {
+                address actor = _getActors()[i];
+                address token = _getAssets()[c];
+                ERC20Faucet(token).mint(actor, 1000e18);
+                vm.prank(actor);
+                ERC20Faucet(token).approve(address(contracts[token].borrowerOperations), type(uint256).max);
+                vm.prank(actor);
+                weth.approve(address(contracts[token].borrowerOperations), type(uint256).max);
+            }
+        }
     }
 
     modifier asAdmin {

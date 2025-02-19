@@ -28,23 +28,23 @@ abstract contract ManagersTargets is
     function switch_asset(uint256 entropy) public {
         _switchAsset(entropy);
         address asset = _getAsset();
-        TestDeployer.LiquityContractsDev memory contracts;
-        TestDeployer.Zappers memory zappers;
-        addressesRegistry = contracts.addressesRegistry;
-        collToken = contracts.collToken;
-        activePool = contracts.activePool;
-        borrowerOperations = contracts.borrowerOperations;
-        collSurplusPool = contracts.pools.collSurplusPool;
-        defaultPool = contracts.pools.defaultPool;
-        sortedTroves = contracts.sortedTroves;
-        stabilityPool = contracts.stabilityPool;
-        troveManager = contracts.troveManager;
-        troveNFT = contracts.troveNFT;
-        gasCompZapper = zappers.gasCompZapper;
-        leverageZapperCurve = zappers.leverageZapperCurve;
-        leverageZapperUniV3 = zappers.leverageZapperUniV3;
-        leverageZapperHybrid = zappers.leverageZapperHybrid;
-        wETHZapper = zappers.wethZapper;
+        TestDeployer.LiquityContractsDev memory _contracts = contracts[asset];
+        TestDeployer.Zappers memory _zappers = zappers[asset];
+        addressesRegistry = _contracts.addressesRegistry;
+        collToken = _contracts.collToken;
+        activePool = _contracts.activePool;
+        borrowerOperations = _contracts.borrowerOperations;
+        collSurplusPool = _contracts.pools.collSurplusPool;
+        defaultPool = _contracts.pools.defaultPool;
+        sortedTroves = _contracts.sortedTroves;
+        stabilityPool = _contracts.stabilityPool;
+        troveManager = _contracts.troveManager;
+        troveNFT = _contracts.troveNFT;
+        gasCompZapper = _zappers.gasCompZapper;
+        leverageZapperCurve = _zappers.leverageZapperCurve;
+        leverageZapperUniV3 = _zappers.leverageZapperUniV3;
+        leverageZapperHybrid = _zappers.leverageZapperHybrid;
+        wETHZapper = _zappers.wethZapper;
     }
 
     /// @dev Deploy a new token and add it to the list of assets, then set it as the current asset

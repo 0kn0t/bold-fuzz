@@ -264,8 +264,9 @@ contract TestDeployer is MetadataDeployment {
     {
         // used for gas compensation and as collateral of the first branch
         WETH = new WETHTester(
-            100 ether, //     _tapAmount
-            1 days //         _tapPeriod
+            100 ether,
+            1 days,
+            msg.sender
         );
         (contractsArray, collateralRegistry, boldToken, hintHelpers, multiTroveGetter, zappersArray) =
             deployAndConnectContracts(troveManagerParamsArray, WETH);
@@ -316,10 +317,11 @@ contract TestDeployer is MetadataDeployment {
         vars.troveManagers[0] = TroveManager(troveManagerAddress);
         for (vars.i = 1; vars.i < vars.numCollaterals; vars.i++) {
             IERC20Metadata collToken = new ERC20Faucet(
-                _nameToken(vars.i), // _name
-                _symboltoken(vars.i), // _symbol
-                100 ether, //     _tapAmount
-                1 days //         _tapPeriod
+                _nameToken(vars.i),
+                _symboltoken(vars.i),
+                100 ether,
+                1 days,
+                msg.sender
             );
             vars.collaterals[vars.i] = collToken;
             // Addresses registry and TM address
@@ -590,16 +592,9 @@ contract TestDeployer is MetadataDeployment {
         AddressesRegistry _addressesRegistry,
         IFlashLoanProvider _flashLoanProvider,
         IExchange _curveExchange,
-        bool _lst
-    ) internal returns (ILeverageZapper) {
-        ILeverageZapper leverageZapperCurve;
-        if (_lst) {
-            leverageZapperCurve = new LeverageLSTZapper(_addressesRegistry, _flashLoanProvider, _curveExchange);
-        } else {
-            leverageZapperCurve = new LeverageWETHZapper(_addressesRegistry, _flashLoanProvider, _curveExchange);
-        }
-
-        return leverageZapperCurve;
+        bool
+    ) internal returns (LeverageLSTZapper) {
+        return new LeverageLSTZapper(_addressesRegistry, _flashLoanProvider, _curveExchange);
     }
 
     struct UniV3Vars {
@@ -614,17 +609,11 @@ contract TestDeployer is MetadataDeployment {
         IBoldToken _boldToken,
         IPriceFeed _priceFeed,
         IFlashLoanProvider _flashLoanProvider,
-        bool _lst
-    ) internal returns (ILeverageZapper) {
+        bool
+    ) internal returns (LeverageLSTZapper) {
         UniV3Vars memory vars;
         vars.uniV3Exchange = new UniV3Exchange(_collToken, _boldToken, UNIV3_FEE, uniV3Router);
-        ILeverageZapper leverageZapperUniV3;
-        if (_lst) {
-            leverageZapperUniV3 = new LeverageLSTZapper(_addressesRegistry, _flashLoanProvider, vars.uniV3Exchange);
-        } else {
-            leverageZapperUniV3 = new LeverageWETHZapper(_addressesRegistry, _flashLoanProvider, vars.uniV3Exchange);
-        }
-
+        LeverageLSTZapper leverageZapperUniV3 = new LeverageLSTZapper(_addressesRegistry, _flashLoanProvider, vars.uniV3Exchange);
         // Create Uni V3 pool
         (vars.price,) = _priceFeed.fetchPrice();
         if (address(_boldToken) < address(_collToken)) {
@@ -652,8 +641,8 @@ contract TestDeployer is MetadataDeployment {
         IBoldToken _boldToken,
         IFlashLoanProvider _flashLoanProvider,
         ICurveStableswapNGPool _usdcCurvePool,
-        bool _lst
-    ) internal returns (ILeverageZapper) {
+        bool
+    ) internal returns (LeverageLSTZapper) {
         IExchange hybridExchange = new HybridCurveUniV3Exchange(
             _collToken,
             _boldToken,
@@ -666,15 +655,7 @@ contract TestDeployer is MetadataDeployment {
             UNIV3_FEE_WETH_COLL,
             uniV3Router
         );
-
-        ILeverageZapper leverageZapperHybrid;
-        if (_lst) {
-            leverageZapperHybrid = new LeverageLSTZapper(_addressesRegistry, _flashLoanProvider, hybridExchange);
-        } else {
-            leverageZapperHybrid = new LeverageWETHZapper(_addressesRegistry, _flashLoanProvider, hybridExchange);
-        }
-
-        return leverageZapperHybrid;
+        return new LeverageLSTZapper(_addressesRegistry, _flashLoanProvider, hybridExchange);
     }
 
     function _deployCurveBoldUsdcPool(IBoldToken _boldToken, bool _mainnet) internal returns (ICurveStableswapNGPool) {
