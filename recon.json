@@ -1,0 +1,647 @@
+{
+  "out/ActivePool.sol/ActivePool.json": {
+    "functions": [
+      {
+        "signature": "accountForReceivedColl(uint256)",
+        "actor": "actor",
+        "mode": "normal"
+      },
+      {
+        "signature": "mintAggInterest()",
+        "actor": "actor",
+        "mode": "normal"
+      },
+      {
+        "signature": "mintAggInterestAndAccountForTroveChange(tuple,address)",
+        "actor": "actor",
+        "mode": "normal"
+      },
+      {
+        "signature": "mintBatchManagementFeeAndAccountForChange(tuple,address)",
+        "actor": "actor",
+        "mode": "normal"
+      },
+      {
+        "signature": "receiveColl(uint256)",
+        "actor": "actor",
+        "mode": "normal"
+      },
+      {
+        "signature": "sendColl(address,uint256)",
+        "actor": "actor",
+        "mode": "normal"
+      },
+      {
+        "signature": "sendCollToDefaultPool(uint256)",
+        "actor": "actor",
+        "mode": "normal"
+      },
+      {
+        "signature": "setShutdownFlag()",
+        "actor": "actor",
+        "mode": "normal"
+      }
+    ],
+    "separated": true
+  },
+  "out/AddressesRegistry.sol/AddressesRegistry.json": {
+    "functions": [
+      {
+        "signature": "setAddresses(tuple)",
+        "actor": "actor",
+        "mode": "normal"
+      }
+    ],
+    "separated": true
+  },
+  "out/BoldToken.sol/BoldToken.json": {
+    "functions": [
+      {
+        "signature": "approve(address,uint256)",
+        "actor": "actor",
+        "mode": "normal"
+      },
+      {
+        "signature": "burn(address,uint256)",
+        "actor": "actor",
+        "mode": "normal"
+      },
+      {
+        "signature": "decreaseAllowance(address,uint256)",
+        "actor": "actor",
+        "mode": "normal"
+      },
+      {
+        "signature": "increaseAllowance(address,uint256)",
+        "actor": "actor",
+        "mode": "normal"
+      },
+      {
+        "signature": "mint(address,uint256)",
+        "actor": "actor",
+        "mode": "normal"
+      },
+      {
+        "signature": "permit(address,address,uint256,uint256,uint8,bytes32,bytes32)",
+        "actor": "actor",
+        "mode": "normal"
+      },
+      {
+        "signature": "returnFromPool(address,address,uint256)",
+        "actor": "actor",
+        "mode": "normal"
+      },
+      {
+        "signature": "sendToPool(address,address,uint256)",
+        "actor": "actor",
+        "mode": "normal"
+      },
+      {
+        "signature": "setBranchAddresses(address,address,address,address)",
+        "actor": "actor",
+        "mode": "normal"
+      },
+      {
+        "signature": "setCollateralRegistry(address)",
+        "actor": "actor",
+        "mode": "normal"
+      },
+      {
+        "signature": "transfer(address,uint256)",
+        "actor": "actor",
+        "mode": "normal"
+      },
+      {
+        "signature": "transferFrom(address,address,uint256)",
+        "actor": "actor",
+        "mode": "normal"
+      }
+    ],
+    "separated": true
+  },
+  "out/BorrowerOperations.sol/BorrowerOperations.json": {
+    "functions": [
+      {
+        "signature": "addColl(uint256,uint256)",
+        "actor": "actor",
+        "mode": "normal"
+      },
+      {
+        "signature": "adjustTrove(uint256,uint256,bool,uint256,bool,uint256)",
+        "actor": "actor",
+        "mode": "normal"
+      },
+      {
+        "signature": "adjustTroveInterestRate(uint256,uint256,uint256,uint256,uint256)",
+        "actor": "actor",
+        "mode": "normal"
+      },
+      {
+        "signature": "adjustZombieTrove(uint256,uint256,bool,uint256,bool,uint256,uint256,uint256)",
+        "actor": "actor",
+        "mode": "normal"
+      },
+      {
+        "signature": "applyPendingDebt(uint256,uint256,uint256)",
+        "actor": "actor",
+        "mode": "normal"
+      },
+      {
+        "signature": "claimCollateral()",
+        "actor": "actor",
+        "mode": "normal"
+      },
+      {
+        "signature": "closeTrove(uint256)",
+        "actor": "actor",
+        "mode": "normal"
+      },
+      {
+        "signature": "lowerBatchManagementFee(uint256)",
+        "actor": "actor",
+        "mode": "normal"
+      },
+      {
+        "signature": "onLiquidateTrove(uint256)",
+        "actor": "actor",
+        "mode": "normal"
+      },
+      {
+        "signature": "openTrove(address,uint256,uint256,uint256,uint256,uint256,uint256,uint256,address,address,address)",
+        "actor": "actor",
+        "mode": "normal"
+      },
+      {
+        "signature": "openTroveAndJoinInterestBatchManager(tuple)",
+        "actor": "actor",
+        "mode": "normal"
+      },
+      {
+        "signature": "registerBatchManager(uint128,uint128,uint128,uint128,uint128)",
+        "actor": "actor",
+        "mode": "normal"
+      },
+      {
+        "signature": "removeFromBatch(uint256,uint256,uint256,uint256,uint256)",
+        "actor": "actor",
+        "mode": "normal"
+      },
+      {
+        "signature": "removeInterestIndividualDelegate(uint256)",
+        "actor": "actor",
+        "mode": "normal"
+      },
+      {
+        "signature": "repayBold(uint256,uint256)",
+        "actor": "actor",
+        "mode": "normal"
+      },
+      {
+        "signature": "setAddManager(uint256,address)",
+        "actor": "actor",
+        "mode": "normal"
+      },
+      {
+        "signature": "setBatchManagerAnnualInterestRate(uint128,uint256,uint256,uint256)",
+        "actor": "actor",
+        "mode": "normal"
+      },
+      {
+        "signature": "setInterestBatchManager(uint256,address,uint256,uint256,uint256)",
+        "actor": "actor",
+        "mode": "normal"
+      },
+      {
+        "signature": "setInterestIndividualDelegate(uint256,address,uint128,uint128,uint256,uint256,uint256,uint256,uint256)",
+        "actor": "actor",
+        "mode": "normal"
+      },
+      {
+        "signature": "setRemoveManager(uint256,address)",
+        "actor": "actor",
+        "mode": "normal"
+      },
+      {
+        "signature": "setRemoveManagerWithReceiver(uint256,address,address)",
+        "actor": "actor",
+        "mode": "normal"
+      },
+      {
+        "signature": "shutdown()",
+        "actor": "actor",
+        "mode": "normal"
+      },
+      {
+        "signature": "shutdownFromOracleFailure()",
+        "actor": "actor",
+        "mode": "normal"
+      },
+      {
+        "signature": "switchBatchManager(uint256,uint256,uint256,address,uint256,uint256,uint256)",
+        "actor": "actor",
+        "mode": "normal"
+      },
+      {
+        "signature": "withdrawBold(uint256,uint256,uint256)",
+        "actor": "actor",
+        "mode": "normal"
+      },
+      {
+        "signature": "withdrawColl(uint256,uint256)",
+        "actor": "actor",
+        "mode": "normal"
+      }
+    ],
+    "separated": true
+  },
+  "out/CollSurplusPool.sol/CollSurplusPool.json": {
+    "functions": [
+      {
+        "signature": "accountSurplus(address,uint256)",
+        "actor": "actor",
+        "mode": "normal"
+      },
+      {
+        "signature": "claimColl(address)",
+        "actor": "actor",
+        "mode": "normal"
+      }
+    ],
+    "separated": true
+  },
+  "out/CollateralRegistry.sol/CollateralRegistry.json": {
+    "functions": [
+      {
+        "signature": "redeemCollateral(uint256,uint256,uint256)",
+        "actor": "actor",
+        "mode": "normal"
+      }
+    ],
+    "separated": true
+  },
+  "out/GasCompZapper.sol/GasCompZapper.json": {
+    "functions": [
+      {
+        "signature": "addColl(uint256,uint256)",
+        "actor": "actor",
+        "mode": "normal"
+      },
+      {
+        "signature": "adjustTrove(uint256,uint256,bool,uint256,bool,uint256)",
+        "actor": "actor",
+        "mode": "normal"
+      },
+      {
+        "signature": "adjustZombieTrove(uint256,uint256,bool,uint256,bool,uint256,uint256,uint256)",
+        "actor": "actor",
+        "mode": "normal"
+      },
+      {
+        "signature": "closeTroveFromCollateral(uint256,uint256)",
+        "actor": "actor",
+        "mode": "normal"
+      },
+      {
+        "signature": "closeTroveToRawETH(uint256)",
+        "actor": "actor",
+        "mode": "normal"
+      },
+      {
+        "signature": "openTroveWithRawETH(tuple)",
+        "actor": "actor",
+        "mode": "normal"
+      },
+      {
+        "signature": "receiveFlashLoanOnCloseTroveFromCollateral(tuple,uint256)",
+        "actor": "actor",
+        "mode": "normal"
+      },
+      {
+        "signature": "receiveFlashLoanOnLeverDownTrove(tuple,uint256)",
+        "actor": "actor",
+        "mode": "normal"
+      },
+      {
+        "signature": "receiveFlashLoanOnLeverUpTrove(tuple,uint256)",
+        "actor": "actor",
+        "mode": "normal"
+      },
+      {
+        "signature": "receiveFlashLoanOnOpenLeveragedTrove(tuple,uint256)",
+        "actor": "actor",
+        "mode": "normal"
+      },
+      {
+        "signature": "repayBold(uint256,uint256)",
+        "actor": "actor",
+        "mode": "normal"
+      },
+      {
+        "signature": "setAddManager(uint256,address)",
+        "actor": "actor",
+        "mode": "normal"
+      },
+      {
+        "signature": "setRemoveManager(uint256,address)",
+        "actor": "actor",
+        "mode": "normal"
+      },
+      {
+        "signature": "setRemoveManagerWithReceiver(uint256,address,address)",
+        "actor": "actor",
+        "mode": "normal"
+      },
+      {
+        "signature": "withdrawBold(uint256,uint256,uint256)",
+        "actor": "actor",
+        "mode": "normal"
+      },
+      {
+        "signature": "withdrawColl(uint256,uint256)",
+        "actor": "actor",
+        "mode": "normal"
+      }
+    ],
+    "separated": true
+  },
+  "out/ILeverageZapper.sol/ILeverageZapper.json": {
+    "functions": [
+      {
+        "signature": "closeTroveFromCollateral(uint256,uint256)",
+        "actor": "actor",
+        "mode": "normal"
+      },
+      {
+        "signature": "leverDownTrove(tuple)",
+        "actor": "actor",
+        "mode": "normal"
+      },
+      {
+        "signature": "leverUpTrove(tuple)",
+        "actor": "actor",
+        "mode": "normal"
+      },
+      {
+        "signature": "openLeveragedTroveWithRawETH(tuple)",
+        "actor": "actor",
+        "mode": "normal"
+      },
+      {
+        "signature": "openTroveWithRawETH(tuple)",
+        "actor": "actor",
+        "mode": "normal"
+      }
+    ],
+    "separated": true
+  },
+  "out/StabilityPool.sol/StabilityPool.json": {
+    "functions": [
+      {
+        "signature": "claimAllCollGains()",
+        "actor": "actor",
+        "mode": "normal"
+      },
+      {
+        "signature": "offset(uint256,uint256)",
+        "actor": "actor",
+        "mode": "normal"
+      },
+      {
+        "signature": "provideToSP(uint256,bool)",
+        "actor": "actor",
+        "mode": "normal"
+      },
+      {
+        "signature": "triggerBoldRewards(uint256)",
+        "actor": "actor",
+        "mode": "normal"
+      },
+      {
+        "signature": "withdrawFromSP(uint256,bool)",
+        "actor": "actor",
+        "mode": "normal"
+      }
+    ],
+    "separated": true
+  },
+  "out/TroveManager.sol/TroveManager.json": {
+    "functions": [
+      {
+        "signature": "batchLiquidateTroves(uint256[])",
+        "actor": "actor",
+        "mode": "normal"
+      },
+      {
+        "signature": "getUnbackedPortionPriceAndRedeemability()",
+        "actor": "actor",
+        "mode": "normal"
+      },
+      {
+        "signature": "onAdjustTrove(uint256,uint256,uint256,tuple)",
+        "actor": "actor",
+        "mode": "normal"
+      },
+      {
+        "signature": "onAdjustTroveInsideBatch(uint256,uint256,uint256,tuple,address,uint256,uint256)",
+        "actor": "actor",
+        "mode": "normal"
+      },
+      {
+        "signature": "onAdjustTroveInterestRate(uint256,uint256,uint256,uint256,tuple)",
+        "actor": "actor",
+        "mode": "normal"
+      },
+      {
+        "signature": "onApplyTroveInterest(uint256,uint256,uint256,address,uint256,uint256,tuple)",
+        "actor": "actor",
+        "mode": "normal"
+      },
+      {
+        "signature": "onCloseTrove(uint256,tuple,address,uint256,uint256)",
+        "actor": "actor",
+        "mode": "normal"
+      },
+      {
+        "signature": "onLowerBatchManagerAnnualFee(address,uint256,uint256,uint256)",
+        "actor": "actor",
+        "mode": "normal"
+      },
+      {
+        "signature": "onOpenTrove(address,uint256,tuple,uint256)",
+        "actor": "actor",
+        "mode": "normal"
+      },
+      {
+        "signature": "onOpenTroveAndJoinBatch(address,uint256,tuple,address,uint256,uint256)",
+        "actor": "actor",
+        "mode": "normal"
+      },
+      {
+        "signature": "onRegisterBatchManager(address,uint256,uint256)",
+        "actor": "actor",
+        "mode": "normal"
+      },
+      {
+        "signature": "onRemoveFromBatch(uint256,uint256,uint256,tuple,address,uint256,uint256,uint256)",
+        "actor": "actor",
+        "mode": "normal"
+      },
+      {
+        "signature": "onSetBatchManagerAnnualInterestRate(address,uint256,uint256,uint256,uint256)",
+        "actor": "actor",
+        "mode": "normal"
+      },
+      {
+        "signature": "onSetInterestBatchManager(tuple)",
+        "actor": "actor",
+        "mode": "normal"
+      },
+      {
+        "signature": "redeemCollateral(address,uint256,uint256,uint256,uint256)",
+        "actor": "actor",
+        "mode": "normal"
+      },
+      {
+        "signature": "setTroveStatusToActive(uint256)",
+        "actor": "actor",
+        "mode": "normal"
+      },
+      {
+        "signature": "shutdown()",
+        "actor": "actor",
+        "mode": "normal"
+      },
+      {
+        "signature": "urgentRedemption(uint256,uint256[],uint256)",
+        "actor": "actor",
+        "mode": "normal"
+      }
+    ],
+    "separated": true
+  },
+  "out/TroveNFT.sol/TroveNFT.json": {
+    "functions": [
+      {
+        "signature": "approve(address,uint256)",
+        "actor": "actor",
+        "mode": "normal"
+      },
+      {
+        "signature": "burn(uint256)",
+        "actor": "actor",
+        "mode": "normal"
+      },
+      {
+        "signature": "mint(address,uint256)",
+        "actor": "actor",
+        "mode": "normal"
+      },
+      {
+        "signature": "safeTransferFrom(address,address,uint256)",
+        "actor": "actor",
+        "mode": "normal"
+      },
+      {
+        "signature": "safeTransferFrom(address,address,uint256,bytes)",
+        "actor": "actor",
+        "mode": "normal"
+      },
+      {
+        "signature": "setApprovalForAll(address,bool)",
+        "actor": "actor",
+        "mode": "normal"
+      },
+      {
+        "signature": "transferFrom(address,address,uint256)",
+        "actor": "actor",
+        "mode": "normal"
+      }
+    ],
+    "separated": true
+  },
+  "out/WETHZapper.sol/WETHZapper.json": {
+    "functions": [
+      {
+        "signature": "addCollWithRawETH(uint256)",
+        "actor": "actor",
+        "mode": "normal"
+      },
+      {
+        "signature": "adjustTroveWithRawETH(uint256,uint256,bool,uint256,bool,uint256)",
+        "actor": "actor",
+        "mode": "normal"
+      },
+      {
+        "signature": "adjustZombieTroveWithRawETH(uint256,uint256,bool,uint256,bool,uint256,uint256,uint256)",
+        "actor": "actor",
+        "mode": "normal"
+      },
+      {
+        "signature": "closeTroveFromCollateral(uint256,uint256)",
+        "actor": "actor",
+        "mode": "normal"
+      },
+      {
+        "signature": "closeTroveToRawETH(uint256)",
+        "actor": "actor",
+        "mode": "normal"
+      },
+      {
+        "signature": "openTroveWithRawETH(tuple)",
+        "actor": "actor",
+        "mode": "normal"
+      },
+      {
+        "signature": "receiveFlashLoanOnCloseTroveFromCollateral(tuple,uint256)",
+        "actor": "actor",
+        "mode": "normal"
+      },
+      {
+        "signature": "receiveFlashLoanOnLeverDownTrove(tuple,uint256)",
+        "actor": "actor",
+        "mode": "normal"
+      },
+      {
+        "signature": "receiveFlashLoanOnLeverUpTrove(tuple,uint256)",
+        "actor": "actor",
+        "mode": "normal"
+      },
+      {
+        "signature": "receiveFlashLoanOnOpenLeveragedTrove(tuple,uint256)",
+        "actor": "actor",
+        "mode": "normal"
+      },
+      {
+        "signature": "repayBold(uint256,uint256)",
+        "actor": "actor",
+        "mode": "normal"
+      },
+      {
+        "signature": "setAddManager(uint256,address)",
+        "actor": "actor",
+        "mode": "normal"
+      },
+      {
+        "signature": "setRemoveManager(uint256,address)",
+        "actor": "actor",
+        "mode": "normal"
+      },
+      {
+        "signature": "setRemoveManagerWithReceiver(uint256,address,address)",
+        "actor": "actor",
+        "mode": "normal"
+      },
+      {
+        "signature": "withdrawBold(uint256,uint256,uint256)",
+        "actor": "actor",
+        "mode": "normal"
+      },
+      {
+        "signature": "withdrawCollToRawETH(uint256,uint256)",
+        "actor": "actor",
+        "mode": "normal"
+      }
+    ],
+    "separated": true
+  }
+}
