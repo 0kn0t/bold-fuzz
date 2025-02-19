@@ -18,7 +18,6 @@ abstract contract BorrowerOperationsTargets is
 
     function borrowerOperations_addColl(uint256 _collAmount) public asActor {
         borrowerOperations.addColl(troveId, _collAmount);
-        t(false,"11");
     }
 
     function borrowerOperations_adjustTrove(uint256 _collChange, bool _isCollIncrease, uint256 _boldChange, bool _isDebtIncrease, uint256 _maxUpfrontFee) public asActor {
@@ -55,7 +54,6 @@ abstract contract BorrowerOperationsTargets is
 
     function borrowerOperations_openTrove(uint256 _ownerIndex, uint256 _collAmount, uint256 _boldAmount, uint256 _annualInterestRate) public asActor {
         troveId = borrowerOperations.openTrove(_getActor(), _ownerIndex, _collAmount, _boldAmount, 0, 0, _annualInterestRate, hintHelpers.predictOpenTroveUpfrontFee(0, _boldAmount, _annualInterestRate), _getActor(), _getActor(), _getActor());
-        t(false,"rrr");
     }
 
     function borrowerOperations_openTroveAndJoinInterestBatchManager(IBorrowerOperations.OpenTroveAndJoinInterestBatchManagerParams memory _params) public asActor {
