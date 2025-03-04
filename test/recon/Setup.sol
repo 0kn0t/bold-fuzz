@@ -5,7 +5,6 @@ pragma solidity ^0.8.0;
 import {BaseSetup} from "@chimera/BaseSetup.sol";
 import {vm} from "@chimera/Hevm.sol";
 
-import "openzeppelin-contracts/contracts/token/ERC20/extensions/IERC20Metadata.sol";
 
 import {TestDeployer} from "../Deployment.t.sol";
 import {ERC20Faucet} from "../mocks/ERC20Faucet.sol";
@@ -29,6 +28,9 @@ import {StabilityPool} from "src/StabilityPool.sol";
 import {TroveManager} from "src/TroveManager.sol";
 import {TroveNFT} from "src/TroveNFT.sol";
 import {WETHZapper} from "src/Zappers/WETHZapper.sol";
+import {MockERC20} from "./mocks/MockERC20.sol";
+import {PriceFeedTestnet} from "../mocks/PriceFeedTestnet.sol";
+import {TroveManagerTester} from "../mocks/TroveManagerTester.t.sol";
 import {IWETH} from "src/Interfaces/IWETH.sol";
 import {HintHelpers} from "src/HintHelpers.sol";
 
@@ -36,9 +38,13 @@ abstract contract Setup is BaseSetup, ActorManager, AssetManager {
     address second_actor = address(0x411c3);
 
     mapping(address => TestDeployer.LiquityContractsDev) contracts;
-    mapping(address => TestDeployer.Zappers) zappers;
 
     uint256 troveId;
+    address batchManager;
+
+    uint256 constant OPEN_TROVE_BORROWED_MIN = 2_000 ether;
+    uint256 constant OPEN_TROVE_BORROWED_MAX = 100_000 ether;
+    uint256 constant OPEN_TROVE_ICR = 1.5 ether; // CCR
 
     ActivePool activePool;
     AddressesRegistry addressesRegistry;
@@ -53,75 +59,73 @@ abstract contract Setup is BaseSetup, ActorManager, AssetManager {
     LeverageLSTZapper leverageZapperHybrid;
     SortedTroves sortedTroves;
     StabilityPool stabilityPool;
-    TroveManager troveManager;
+    TroveManagerTester troveManager;
     TroveNFT troveNFT;
-    WETHZapper wETHZapper;
-    IERC20Metadata collToken;
+    MockERC20 collToken;
     HintHelpers hintHelpers;
+    PriceFeedTestnet priceFeed;
 
     function setup() internal virtual override {
         vm.warp(block.timestamp + 600);
         _addActor(second_actor);
 
-
-        TestDeployer.TroveManagerParams[] memory troveManagerParamsArray = new TestDeployer.TroveManagerParams[](3);
+        TestDeployer.TroveManagerParams[] memory troveManagerParamsArray = new TestDeployer.TroveManagerParams[](2);
         troveManagerParamsArray[0] = TestDeployer.TroveManagerParams(150e16, 110e16, 110e16, 5e16, 10e16);
         troveManagerParamsArray[1] = TestDeployer.TroveManagerParams(160e16, 120e16, 120e16, 5e16, 10e16);
-        troveManagerParamsArray[2] = TestDeployer.TroveManagerParams(160e16, 125e16, 125e16, 5e16, 10e16);
-
         TestDeployer deployer = new TestDeployer();
         TestDeployer.LiquityContractsDev[] memory _contractsArray;
-        TestDeployer.Zappers[] memory _zappersArray;
         ICollateralRegistry _collateralRegistry;
         IBoldToken _boldToken;
         IWETH weth;
-        (_contractsArray, _collateralRegistry, _boldToken, hintHelpers,, weth, _zappersArray) = deployer.deployAndConnectContractsMultiColl(troveManagerParamsArray);
+        (
+            _contractsArray,
+            _collateralRegistry,
+            _boldToken,
+            hintHelpers,
+            ,
+            weth,
+        ) = deployer.deployAndConnectContractsMultiColl(
+            troveManagerParamsArray
+        );
         collateralRegistry = CollateralRegistry(address(_collateralRegistry));
         boldToken = BoldToken(address(_boldToken));
-
         contracts[address(weth)] = _contractsArray[0];
-        zappers[address(weth)] = _zappersArray[0];
         _addAsset(address(weth));
         _switchAsset(0);
-        for(uint i = 1; i < _contractsArray.length; i++) {
-            contracts[address(_contractsArray[i].collToken)] = _contractsArray[i];
-            zappers[address(_contractsArray[i].collToken)] = _zappersArray[i];
+        for (uint i = 1; i < _contractsArray.length; i++) {
+            contracts[address(_contractsArray[i].collToken)] = _contractsArray[
+                i
+            ];
             _addAsset(address(_contractsArray[i].collToken));
         }
 
         addressesRegistry = _contractsArray[0].addressesRegistry;
-        collToken = _contractsArray[0].collToken;
+        collToken = MockERC20(address(_contractsArray[0].collToken));
         activePool = _contractsArray[0].activePool;
         borrowerOperations = _contractsArray[0].borrowerOperations;
         collSurplusPool = _contractsArray[0].pools.collSurplusPool;
         defaultPool = _contractsArray[0].pools.defaultPool;
+        priceFeed = _contractsArray[0].priceFeed;
         sortedTroves = _contractsArray[0].sortedTroves;
         stabilityPool = _contractsArray[0].stabilityPool;
         troveManager = _contractsArray[0].troveManager;
-        troveNFT = _contractsArray[0].troveNFT;
-        gasCompZapper = _zappersArray[0].gasCompZapper;
-        wETHZapper = _zappersArray[0].wethZapper;
 
-        for (uint256 c = 0; c < 3; c++) {
+        for (uint256 c = 0; c < 2; c++) {
             for (uint256 i = 0; i < _getActors().length; i++) {
                 address actor = _getActors()[i];
                 address token = _getAssets()[c];
                 ERC20Faucet(token).mint(actor, 1000e18);
                 vm.prank(actor);
-                ERC20Faucet(token).approve(address(contracts[token].borrowerOperations), type(uint256).max);
+                ERC20Faucet(token).approve(
+                    address(contracts[token].borrowerOperations),
+                    type(uint256).max
+                );
                 vm.prank(actor);
-                weth.approve(address(contracts[token].borrowerOperations), type(uint256).max);
+                weth.approve(
+                    address(contracts[token].borrowerOperations),
+                    type(uint256).max
+                );
             }
         }
-    }
-
-    modifier asAdmin {
-        vm.prank(address(this));
-        _;
-    }
-
-    modifier asActor {
-        vm.prank(_getActor());
-        _;
     }
 }

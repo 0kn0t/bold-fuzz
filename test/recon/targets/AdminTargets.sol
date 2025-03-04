@@ -13,13 +13,5 @@ abstract contract AdminTargets is
     /// CUSTOM TARGET FUNCTIONS - Add your own target functions here ///
 
 
-    /// AUTO GENERATED TARGET FUNCTIONS ///
-
-//    function boldToken_setBranchAddresses(address _troveManagerAddress, address _stabilityPoolAddress, address _borrowerOperationsAddress, address _activePoolAddress) public asAdmin {
-//        boldToken.setBranchAddresses(_troveManagerAddress, _stabilityPoolAddress, _borrowerOperationsAddress, _activePoolAddress);
-//    }
-
-//    function boldToken_setCollateralRegistry(address _collateralRegistryAddress) public asAdmin {
-//        boldToken.setCollateralRegistry(_collateralRegistryAddress);
-//    }
+    /// AUTO GENERATED TARGET FUNCTIONS - WARNING: DO NOT DELETE OR MODIFY THIS LINE ///
 }

@@ -29,22 +29,17 @@ abstract contract ManagersTargets is
         _switchAsset(entropy);
         address asset = _getAsset();
         TestDeployer.LiquityContractsDev memory _contracts = contracts[asset];
-        TestDeployer.Zappers memory _zappers = zappers[asset];
         addressesRegistry = _contracts.addressesRegistry;
-        collToken = _contracts.collToken;
+        collToken = MockERC20(address(_contracts.collToken));
         activePool = _contracts.activePool;
         borrowerOperations = _contracts.borrowerOperations;
         collSurplusPool = _contracts.pools.collSurplusPool;
         defaultPool = _contracts.pools.defaultPool;
+        priceFeed = _contracts.priceFeed;
         sortedTroves = _contracts.sortedTroves;
         stabilityPool = _contracts.stabilityPool;
         troveManager = _contracts.troveManager;
         troveNFT = _contracts.troveNFT;
-        gasCompZapper = _zappers.gasCompZapper;
-        leverageZapperCurve = _zappers.leverageZapperCurve;
-        leverageZapperUniV3 = _zappers.leverageZapperUniV3;
-        leverageZapperHybrid = _zappers.leverageZapperHybrid;
-        wETHZapper = _zappers.wethZapper;
     }
 
     /// @dev Deploy a new token and add it to the list of assets, then set it as the current asset

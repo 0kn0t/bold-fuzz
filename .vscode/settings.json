@@ -1,0 +1,10 @@
+{
+    "wake.compiler.solc.remappings": [
+        "openzeppelin/=lib/V2-gov/lib/openzeppelin-contracts/",
+        "openzeppelin-contracts/=lib/openzeppelin-contracts/",
+        "@chimera/=lib/chimera/src/"
+    ],
+    "coverage-gutters.manualCoverageFilePaths": [
+        "/root/tera/projects/liquity/echidna/covered.1740993125.lcov"
+    ]
+}
