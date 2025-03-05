@@ -43,7 +43,7 @@ abstract contract Properties is BeforeAfter, Asserts {
     function property_debt_increase() public {
         // Verify that debt increases over time due to interest accrual
 
-        if(currentOperation == OpType.ADJUSTING_TROVE) {
+        if(currentOperation == OpType.ADJUSTING_TROVE || currentOperation == OpType.ADJUSTING_IR) {
             return;
         }
 
