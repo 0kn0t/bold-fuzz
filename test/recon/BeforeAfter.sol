@@ -4,6 +4,10 @@ pragma solidity ^0.8.0;
 import {Setup} from "./Setup.sol";
 import {LiquityMath} from "../../src/Dependencies/LiquityMath.sol";
 
+enum OpType {
+    GENERIC
+}
+
 // ghost variables for tracking state variable values before and after function calls
 abstract contract BeforeAfter is Setup {
     struct Vars {
@@ -13,7 +17,17 @@ abstract contract BeforeAfter is Setup {
     Vars internal _before;
     Vars internal _after;
 
-    modifier updateGhosts {
+    OpType currentOperation;
+
+    modifier updateGhosts() {
+        currentOperation = OpType.GENERIC;
+        __before();
+        _;
+        __after();
+    }
+
+    modifier updateGhostsWithType(OpType op) {
+        currentOperation = op;
         __before();
         _;
         __after();

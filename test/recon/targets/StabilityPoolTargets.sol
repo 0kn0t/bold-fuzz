@@ -20,10 +20,6 @@ abstract contract StabilityPoolTargets is
         stabilityPool.claimAllCollGains();
     }
 
-    function stabilityPool_offset(uint256 _debtToOffset, uint256 _collToAdd) public asActor {
-        stabilityPool.offset(_debtToOffset, _collToAdd);
-    }
-
     function stabilityPool_provideToSP(uint256 _topUp, bool _doClaim) public asActor {
         stabilityPool.provideToSP(_topUp, _doClaim);
     }
