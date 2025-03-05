@@ -2,7 +2,7 @@
 pragma solidity ^0.8.0;
 
 import {BaseTargetFunctions} from "@chimera/BaseTargetFunctions.sol";
-import {BeforeAfter} from "../BeforeAfter.sol";
+import {BeforeAfter, OpType} from "../BeforeAfter.sol";
 import {Properties} from "../Properties.sol";
 import {vm} from "@chimera/Hevm.sol";
 import "src/BorrowerOperations.sol";
@@ -25,11 +25,11 @@ abstract contract BorrowerOperationsTargets is
         borrowerOperations_addColl(troveId, collAmount);
     }
 
-    function borrowerOperations_adjustTrove(uint256 _troveId, uint256 _collChange, bool _isCollIncrease, uint256 _boldChange, bool _isDebtIncrease, uint256 _maxUpfrontFee) public updateGhosts asActor {
+    function borrowerOperations_adjustTrove(uint256 _troveId, uint256 _collChange, bool _isCollIncrease, uint256 _boldChange, bool _isDebtIncrease, uint256 _maxUpfrontFee) public updateGhostsWithType(OpType.ADJUSTING_TROVE) asActor {
         borrowerOperations.adjustTrove(_troveId, _collChange, _isCollIncrease, _boldChange, _isDebtIncrease, _maxUpfrontFee);
     }
 
-    function borrowerOperations_adjustTrove(uint88 _collChange, bool _isCollIncrease, uint256 _boldChange, bool _isDebtIncrease) public {
+    function borrowerOperations_adjustTrove_clamped(uint88 _collChange, bool _isCollIncrease, uint256 _boldChange, bool _isDebtIncrease) public {
         uint256 collChange;
         if (_isCollIncrease) {
             collChange = _collChange % (collToken.balanceOf(_getActor()) + 1);
@@ -39,7 +39,7 @@ abstract contract BorrowerOperationsTargets is
         borrowerOperations_adjustTrove(troveId, collChange, _isCollIncrease, _boldChange, _isDebtIncrease, type(uint256).max);
     }
 
-    function borrowerOperations_adjustTroveInterestRate(uint256 _troveId, uint256 _newAnnualInterestRate, uint256 _upperHint, uint256 _lowerHint, uint256 _maxUpfrontFee) public updateGhosts asActor {
+    function borrowerOperations_adjustTroveInterestRate(uint256 _troveId, uint256 _newAnnualInterestRate, uint256 _upperHint, uint256 _lowerHint, uint256 _maxUpfrontFee) public updateGhostsWithType(OpType.ADJUSTING_IR) asActor {
         borrowerOperations.adjustTroveInterestRate(_troveId, _newAnnualInterestRate, _upperHint, _lowerHint, _maxUpfrontFee);
     }
 
@@ -47,7 +47,7 @@ abstract contract BorrowerOperationsTargets is
         borrowerOperations_adjustTroveInterestRate(troveId, _newAnnualInterestRate, 0, 0, type(uint256).max);
     }
 
-    function borrowerOperations_adjustZombieTrove(uint256 _troveId, uint256 _collChange, bool _isCollIncrease, uint256 _boldChange, bool _isDebtIncrease, uint256 _upperHint, uint256 _lowerHint, uint256 _maxUpfrontFee) public asActor {
+    function borrowerOperations_adjustZombieTrove(uint256 _troveId, uint256 _collChange, bool _isCollIncrease, uint256 _boldChange, bool _isDebtIncrease, uint256 _upperHint, uint256 _lowerHint, uint256 _maxUpfrontFee) public updateGhosts asActor {
         borrowerOperations.adjustZombieTrove(_troveId, _collChange, _isCollIncrease, _boldChange, _isDebtIncrease, _upperHint, _lowerHint, _maxUpfrontFee);
     }
 
@@ -77,7 +77,7 @@ abstract contract BorrowerOperationsTargets is
         borrowerOperations.claimCollateral();
     }
 
-    function borrowerOperations_closeTrove(uint256 _troveId) public asActor {
+    function borrowerOperations_closeTrove(uint256 _troveId) public updateGhostsWithType(OpType.CLOSE) asActor {
         borrowerOperations.closeTrove(_troveId);
     }
 
@@ -89,7 +89,7 @@ abstract contract BorrowerOperationsTargets is
         borrowerOperations.lowerBatchManagementFee(_newAnnualManagementFee);
     }
 
-    function borrowerOperations_openTrove(address _owner, uint256 _ownerIndex, uint256 _collAmount, uint256 _boldAmount, uint256 _upperHint, uint256 _lowerHint, uint256 _annualInterestRate, uint256 _maxUpfrontFee, address _addManager, address _removeManager, address _receiver) public updateGhosts asActor returns (uint256) {
+    function borrowerOperations_openTrove(address _owner, uint256 _ownerIndex, uint256 _collAmount, uint256 _boldAmount, uint256 _upperHint, uint256 _lowerHint, uint256 _annualInterestRate, uint256 _maxUpfrontFee, address _addManager, address _removeManager, address _receiver) public updateGhostsWithType(OpType.OPENING) asActor returns (uint256) {
         troveId = borrowerOperations.openTrove(_owner, _ownerIndex, _collAmount, _boldAmount, _upperHint, _lowerHint, _annualInterestRate, _maxUpfrontFee, _addManager, _removeManager, _receiver);
         return troveId;
     }
@@ -98,7 +98,7 @@ abstract contract BorrowerOperationsTargets is
         return borrowerOperations_openTrove(_getActor(), _ownerIndex, _collAmount, _boldAmount, 0, 0, 1e17, type(uint256).max, _getActor(), _getActor(), _getActor());
     }
 
-    function borrowerOperations_openTroveAndJoinInterestBatchManager(IBorrowerOperations.OpenTroveAndJoinInterestBatchManagerParams memory _params) public updateGhosts asActor returns (uint256) {
+    function borrowerOperations_openTroveAndJoinInterestBatchManager(IBorrowerOperations.OpenTroveAndJoinInterestBatchManagerParams memory _params) public updateGhostsWithType(OpType.OPENING) asActor returns (uint256) {
         troveId = borrowerOperations.openTroveAndJoinInterestBatchManager(_params);
         return troveId;
     }
@@ -145,7 +145,7 @@ abstract contract BorrowerOperationsTargets is
         borrowerOperations_removeInterestIndividualDelegate(troveId);
     }
 
-    function borrowerOperations_repayBold(uint256 _troveId, uint256 _boldAmount) public asActor {
+    function borrowerOperations_repayBold(uint256 _troveId, uint256 _boldAmount) public updateGhostsWithType(OpType.REPAY) asActor {
         borrowerOperations.repayBold(_troveId, _boldAmount);
     }
 

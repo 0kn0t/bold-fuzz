@@ -8,15 +8,7 @@ import "forge-std/console2.sol";
 import {Properties} from "../Properties.sol";
 
 abstract contract PriceFeedTargets is BaseTargetFunctions, Properties  {
-    function priceFeed_fetchPrice() public {
-        priceFeed.fetchPrice();
-    }
-
-    function priceFeed_fetchRedemptionPrice() public {
-        priceFeed.fetchRedemptionPrice();
-    }
-
-    function priceFeed_setPrice(uint88 price) public {
+    function priceFeed_setPrice(uint88 price) public updateGhosts {
         priceFeed.setPrice(price);
     }
 
